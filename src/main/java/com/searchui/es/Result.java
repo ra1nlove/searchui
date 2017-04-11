@@ -1,42 +1,40 @@
 package com.searchui.es;
 
+import com.sun.org.apache.regexp.internal.RE;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by rain on 17-4-11.
  */
 public class Result {
-    String title ;
-    String text;
-    String url;
 
-    public String getUrl() {
-        return url;
+    private long total;
+    private List<Page> pages = new ArrayList<Page>();
+
+    public Result(long total,List<Page> pages){
+        this.total = total;
+        this.pages = pages;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+
+    public float getTotal() {
+        return total;
     }
 
-    public String getText() {
-        return text;
+    public void setTotal(long total) {
+        this.total = total;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public List<Page> getPages() {
+        return pages;
     }
 
-    public String getTitle() {
-
-        return title;
+    public void setPages(List<Page> pages) {
+        this.pages = pages;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
-    public Result(String title, String text, String url){
-        this.text = text;
-        this.title = title;
-        this.url = url;
 
-    }
 }

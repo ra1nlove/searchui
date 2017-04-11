@@ -33,10 +33,9 @@ public class Query {
         }
     }
 
-    public Map<String,String> query(String keyword, int page){
+    public String query(String keyword, int pagenum){
 
-        Map<String,String> result = new HashMap<String, String>();
-        List<Result> pages = new ArrayList<Result>();
+        List<Page> pages = new ArrayList<Page>();
 
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.preTags("<em>");
@@ -50,7 +49,7 @@ public class Query {
                 .setQuery(QueryBuilders.multiMatchQuery(keyword,"title","desc","content","keywords"))
                 .highlighter(highlightBuilder)
                 .setSize(10)
-                .setFrom(page*10)
+                .setFrom(pagenum*10)
                 .get();
 
         for(SearchHit hit : response.getHits()){
@@ -84,14 +83,13 @@ public class Query {
             }
             url = hit.getSource().get("url").toString();
 
-            Result re = new Result(title,desc,url);
-            pages.add(re);
+            Page page = new Page(title,desc,url);
+            pages.add(page);
         }
-        String data = JSON.toJSONString(pages);
-        float total = response.getHits().totalHits();
-        result.put("data",data);
-        result.put("total",String.valueOf(total));
-       return result;
+        Result res = new Result(response.getHits().totalHits(),pages);
+        String data = JSON.toJSONString(res);
+
+       return data;
     }
 
     public static void main(String[] args) throws Exception{

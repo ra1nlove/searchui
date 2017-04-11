@@ -23,10 +23,10 @@ class MainController {
                 @RequestParam("page") int page){
 
         Query query = new Query();
-        Map<String,String> map = query.query(keyword,page);
+//        Map<String,String> map = query.query(keyword,page);
         ModelAndView mv = new ModelAndView();
-        mv.addObject("message",map.get("data"));
-        mv.addObject("total",map.get("total"));
+  //      mv.addObject("message",map.get("data"));
+ //       mv.addObject("total",map.get("total"));
         mv.setViewName("search");
         return mv;
 
@@ -36,11 +36,9 @@ class MainController {
     public String getPages(
             @RequestParam("keyword") String keyword,
             @RequestParam("page") int page){
-
         Query query = new Query();
-        Map<String,String> map = query.query(keyword,page);
-
-        return map.get("data");
+        String data = query.query(keyword,page);
+        return data;
 
     }
 
