@@ -14,7 +14,9 @@ import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rain on 17-4-4.
@@ -31,9 +33,10 @@ public class Query {
         }
     }
 
-    public String query(String keyword,int page){
+    public Map<String,String> query(String keyword, int page){
 
-        List<Result> res = new ArrayList<Result>();
+        Map<String,String> result = new HashMap<String, String>();
+        List<Result> pages = new ArrayList<Result>();
 
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.preTags("<em>");
@@ -82,9 +85,13 @@ public class Query {
             url = hit.getSource().get("url").toString();
 
             Result re = new Result(title,desc,url);
-            res.add(re);
+            pages.add(re);
         }
-       return JSON.toJSONString(res);
+        String data = JSON.toJSONString(pages);
+        float total = response.getHits().totalHits();
+        result.put("data",data);
+        result.put("total",String.valueOf(total));
+       return result;
     }
 
     public static void main(String[] args) throws Exception{
