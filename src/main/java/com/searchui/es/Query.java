@@ -41,9 +41,9 @@ public class Query {
         highlightBuilder.field("title");
         highlightBuilder.field("desc");
 
-        SearchResponse response = client.prepareSearch("page").setTypes("fulltext")
+        SearchResponse response = client.prepareSearch("web").setTypes("page")
                 .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-                .setQuery(QueryBuilders.multiMatchQuery(keyword,"title","desc","content","keywords"))
+                .setQuery(QueryBuilders.multiMatchQuery(keyword,"title","desc","content","keyword"))
                 .highlighter(highlightBuilder)
                 .setSize(10)
                 .setFrom(pagenum*10)
@@ -92,7 +92,7 @@ public class Query {
 
     public static void main(String[] args) throws Exception{
         Query query = new Query();
-        System.out.print(query.query("全球热恋",5));
+        System.out.print(query.query("sina",0));
     }
 
 }

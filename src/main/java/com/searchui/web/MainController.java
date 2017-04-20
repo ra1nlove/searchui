@@ -32,7 +32,7 @@ class MainController {
 
     }
 
-    @RequestMapping(value = "get",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/get",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
     public String getPages(
             @RequestParam("keyword") String keyword,
             @RequestParam("page") int page){
