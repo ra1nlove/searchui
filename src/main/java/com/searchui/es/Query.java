@@ -1,7 +1,6 @@
 package com.searchui.es;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.lucene.queryparser.flexible.core.builders.QueryBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
@@ -14,9 +13,7 @@ import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by rain on 17-4-4.
@@ -86,6 +83,7 @@ public class Query {
             Page page = new Page(title,desc,url);
             pages.add(page);
         }
+
         Result res = new Result(response.getHits().totalHits(),pages);
         String data = JSON.toJSONString(res);
 

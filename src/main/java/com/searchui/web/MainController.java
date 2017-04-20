@@ -25,9 +25,9 @@ class MainController {
         Query query = new Query();
 //        Map<String,String> map = query.query(keyword,page);
         ModelAndView mv = new ModelAndView();
-  //      mv.addObject("message",map.get("data"));
- //       mv.addObject("total",map.get("total"));
-        mv.setViewName("search");
+//        mv.addObject("message",map.get("data"));
+//        mv.addObject("total",map.get("total"));
+//        mv.setViewName("search");
         return mv;
 
     }
@@ -39,7 +39,6 @@ class MainController {
         Query query = new Query();
         String data = query.query(keyword,page);
         return data;
-
     }
 
 
